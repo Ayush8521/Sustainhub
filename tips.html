@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Eco Tips – SustainHub</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="nav-brand">
+      <span class="leaf-icon">🌿</span>
+      <span class="brand-name">SustainHub</span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="calculator.html">Calculator</a></li>
+      <li><a href="tracker.html">My Progress</a></li>
+      <li><a href="challenges.html">Challenges</a></li>
+      <li><a href="tips.html" class="active">Eco Tips</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menu">&#9776;</button>
+    <div class="nav-user">
+      <span class="nav-username-badge">👤 <span id="nav-username">...</span></span>
+      <button class="btn-logout">Logout</button>
+    </div>
+  </nav>
+
+  <div class="page-header">
+    <h1>💡 Sustainability Tips</h1>
+    <p>Personalized suggestions to help you reduce your carbon footprint starting today.</p>
+  </div>
+
+  <div class="tips-container">
+
+    <!-- TIP OF THE DAY -->
+    <div class="tip-of-day">
+      <div class="tod-badge">💡 Tip of the Day</div>
+      <div class="tod-content" id="tip-of-day-content">Loading...</div>
+      <button class="btn btn-outline" onclick="newTip()">Next tip →</button>
+    </div>
+
+    <!-- CATEGORY FILTER -->
+    <div class="challenge-filters">
+      <button class="filter-btn active" onclick="filterTips('all')">All Tips</button>
+      <button class="filter-btn" onclick="filterTips('energy')">⚡ Energy</button>
+      <button class="filter-btn" onclick="filterTips('transport')">🚗 Transport</button>
+      <button class="filter-btn" onclick="filterTips('food')">🥗 Food</button>
+      <button class="filter-btn" onclick="filterTips('waste')">♻️ Waste</button>
+    </div>
+
+    <!-- TIPS GRID -->
+    <div class="tips-grid" id="tips-grid">
+      <!-- rendered by JS -->
+    </div>
+
+  </div>
+
+  <footer class="footer">
+    <div class="footer-bottom">
+      <p>© 2025 SustainHub | SDG 13 – Climate Action | Lenovo × Bharat Cares</p>
+    </div>
+  </footer>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>

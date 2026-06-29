@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Progress – SustainHub</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="nav-brand">
+      <span class="leaf-icon">🌿</span>
+      <span class="brand-name">SustainHub</span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="calculator.html">Calculator</a></li>
+      <li><a href="tracker.html" class="active">My Progress</a></li>
+      <li><a href="challenges.html">Challenges</a></li>
+      <li><a href="tips.html">Eco Tips</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menu">&#9776;</button>
+    <div class="nav-user">
+      <span class="nav-username-badge">👤 <span id="nav-username">...</span></span>
+      <button class="btn-logout">Logout</button>
+    </div>
+  </nav>
+
+  <div class="page-header">
+    <h1>📊 My Carbon Progress</h1>
+    <p>Track your daily footprint and see your improvement over time.</p>
+  </div>
+
+  <div class="tracker-container">
+
+    <!-- SUMMARY STATS -->
+    <div class="summary-grid">
+      <div class="summary-card">
+        <div class="sum-icon">📅</div>
+        <div class="sum-val" id="days-tracked">0</div>
+        <div class="sum-label">Days Tracked</div>
+      </div>
+      <div class="summary-card">
+        <div class="sum-icon">📉</div>
+        <div class="sum-val" id="avg-footprint">–</div>
+        <div class="sum-label">Avg Footprint (tons/yr)</div>
+      </div>
+      <div class="summary-card">
+        <div class="sum-icon">🏆</div>
+        <div class="sum-val" id="best-day">–</div>
+        <div class="sum-label">Best Score (tons/yr)</div>
+      </div>
+      <div class="summary-card">
+        <div class="sum-icon">🌱</div>
+        <div class="sum-val" id="co2-saved">0</div>
+        <div class="sum-label">kg CO₂ Saved (est.)</div>
+      </div>
+    </div>
+
+    <!-- MANUAL LOG ENTRY -->
+    <div class="log-section">
+      <h2>Log Today's Entry</h2>
+      <div class="log-form">
+        <div class="log-field">
+          <label>Date</label>
+          <input type="date" id="log-date" />
+        </div>
+        <div class="log-field">
+          <label>Footprint (tons CO₂/yr)</label>
+          <input type="number" id="log-score" placeholder="e.g. 2.4" step="0.1" min="0" />
+        </div>
+        <div class="log-field">
+          <label>Notes (optional)</label>
+          <input type="text" id="log-note" placeholder="e.g. Used bike today" />
+        </div>
+        <button class="btn btn-primary" onclick="addLogEntry()">Add Entry</button>
+      </div>
+    </div>
+
+    <!-- CHART -->
+    <div class="chart-section">
+      <h2>Footprint Over Time</h2>
+      <div class="chart-wrap">
+        <canvas id="footprint-chart" height="100"></canvas>
+      </div>
+      <div class="chart-empty" id="chart-empty">
+        <p>📈 No data yet. Use the Carbon Calculator or add a manual entry above to start tracking!</p>
+        <a href="calculator.html" class="btn btn-primary">Go to Calculator</a>
+      </div>
+    </div>
+
+    <!-- LOG TABLE -->
+    <div class="log-table-section">
+      <h2>Your Log History</h2>
+      <div class="table-wrap">
+        <table class="log-table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Footprint (tons/yr)</th>
+              <th>Level</th>
+              <th>Notes</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="log-tbody">
+            <tr id="empty-row">
+              <td colspan="5" style="text-align:center; color:#aaa; padding:2rem;">No entries yet. Start by using the calculator!</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ACHIEVEMENTS -->
+    <div class="achieve-section">
+      <h2>🏅 Achievements</h2>
+      <div class="achieve-grid" id="achieve-grid">
+        <div class="achieve-card locked" id="ach-first">
+          <div class="ach-icon">🌱</div>
+          <div class="ach-name">First Step</div>
+          <div class="ach-desc">Log your first entry</div>
+        </div>
+        <div class="achieve-card locked" id="ach-week">
+          <div class="ach-icon">📅</div>
+          <div class="ach-name">Week Warrior</div>
+          <div class="ach-desc">Track for 7 days</div>
+        </div>
+        <div class="achieve-card locked" id="ach-low">
+          <div class="ach-icon">⭐</div>
+          <div class="ach-name">Low Carbon Hero</div>
+          <div class="ach-desc">Score below 2 tons/yr</div>
+        </div>
+        <div class="achieve-card locked" id="ach-improve">
+          <div class="ach-icon">📈</div>
+          <div class="ach-name">Getting Better</div>
+          <div class="ach-desc">Improve your score 3 times</div>
+        </div>
+        <div class="achieve-card locked" id="ach-month">
+          <div class="ach-icon">🏆</div>
+          <div class="ach-name">Month Champion</div>
+          <div class="ach-desc">Track for 30 days</div>
+        </div>
+        <div class="achieve-card locked" id="ach-green">
+          <div class="ach-icon">🌍</div>
+          <div class="ach-name">Climate Warrior</div>
+          <div class="ach-desc">Average below India's 1.9 tons</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer class="footer">
+    <div class="footer-bottom">
+      <p>© 2025 SustainHub | SDG 13 – Climate Action | Lenovo × Bharat Cares</p>
+    </div>
+  </footer>
+
+  </script>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

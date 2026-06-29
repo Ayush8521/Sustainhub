@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Carbon Calculator – SustainHub</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="nav-brand">
+      <span class="leaf-icon">🌿</span>
+      <span class="brand-name">SustainHub</span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="calculator.html" class="active">Calculator</a></li>
+      <li><a href="tracker.html">My Progress</a></li>
+      <li><a href="challenges.html">Challenges</a></li>
+      <li><a href="tips.html">Eco Tips</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menu">&#9776;</button>
+    <div class="nav-user">
+      <span class="nav-username-badge">👤 <span id="nav-username">...</span></span>
+      <button class="btn-logout"></button>Logout</button>
+    </div>
+  </nav>
+
+  <div class="page-header">
+    <h1>🧮 Carbon Footprint Calculator</h1>
+    <p>Answer a few questions about your daily habits to estimate your personal CO₂ emissions.</p>
+  </div>
+
+  <div class="calc-container">
+
+    <!-- PROGRESS BAR -->
+    <div class="calc-progress">
+      <div class="prog-step active" data-step="1">
+        <div class="prog-circle">1</div>
+        <span>Energy</span>
+      </div>
+      <div class="prog-line"></div>
+      <div class="prog-step" data-step="2">
+        <div class="prog-circle">2</div>
+        <span>Transport</span>
+      </div>
+      <div class="prog-line"></div>
+      <div class="prog-step" data-step="3">
+        <div class="prog-circle">3</div>
+        <span>Food</span>
+      </div>
+      <div class="prog-line"></div>
+      <div class="prog-step" data-step="4">
+        <div class="prog-circle">4</div>
+        <span>Waste</span>
+      </div>
+    </div>
+
+    <!-- STEP 1: ENERGY -->
+    <div class="calc-step active" id="step-1">
+      <h2>⚡ Energy & Electricity</h2>
+      <div class="form-group">
+        <label>Monthly electricity bill (₹)</label>
+        <input type="number" id="electricity-bill" placeholder="e.g. 800" min="0" />
+        <small>Enter your average monthly electricity expense in Indian Rupees</small>
+      </div>
+      <div class="form-group">
+        <label>Do you use LPG gas at home?</label>
+        <select id="lpg-use">
+          <option value="0">No</option>
+          <option value="1">Yes, 1 cylinder/month</option>
+          <option value="2">Yes, 2 cylinders/month</option>
+          <option value="3">Yes, 3+ cylinders/month</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Do you use AC (Air Conditioner)?</label>
+        <select id="ac-use">
+          <option value="0">No AC</option>
+          <option value="2">Occasionally (2-4 hrs/day)</option>
+          <option value="6">Regularly (6-8 hrs/day)</option>
+          <option value="12">Almost always (10+ hrs/day)</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Home type</label>
+        <select id="home-type">
+          <option value="0.5">Small apartment (1-2 rooms)</option>
+          <option value="1">Medium apartment (3 rooms)</option>
+          <option value="1.5">Large apartment / house</option>
+          <option value="2">Villa / bungalow</option>
+        </select>
+      </div>
+      <div class="btn-row">
+        <button class="btn btn-primary" onclick="nextStep(2)">Next: Transport →</button>
+      </div>
+    </div>
+
+    <!-- STEP 2: TRANSPORT -->
+    <div class="calc-step" id="step-2">
+      <h2>🚗 Transportation</h2>
+      <div class="form-group">
+        <label>Primary mode of daily transport</label>
+        <select id="transport-mode">
+          <option value="0.1">Walking / Cycling</option>
+          <option value="0.3">Public Bus / Metro / Train</option>
+          <option value="0.8">Two-wheeler (bike/scooter)</option>
+          <option value="1.5">Car (petrol/diesel)</option>
+          <option value="0.4">Electric vehicle (EV)</option>
+          <option value="0.6">Auto-rickshaw / Cab (shared)</option>
+          <option value="1.2">Private cab (Ola/Uber solo)</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Daily travel distance (km)</label>
+        <input type="number" id="travel-km" placeholder="e.g. 20" min="0" />
+        <small>Total km traveled per day (one-way + return)</small>
+      </div>
+      <div class="form-group">
+        <label>How often do you fly in a year?</label>
+        <select id="flight-freq">
+          <option value="0">Never</option>
+          <option value="0.5">Rarely (1-2 short flights)</option>
+          <option value="1.5">Occasionally (3-5 domestic)</option>
+          <option value="3">Frequently (international travel)</option>
+          <option value="6">Very frequently (4+ international/year)</option>
+        </select>
+      </div>
+      <div class="btn-row">
+        <button class="btn btn-outline" onclick="prevStep(1)">← Back</button>
+        <button class="btn btn-primary" onclick="nextStep(3)">Next: Food →</button>
+      </div>
+    </div>
+
+    <!-- STEP 3: FOOD -->
+    <div class="calc-step" id="step-3">
+      <h2>🥗 Food & Diet</h2>
+      <div class="form-group">
+        <label>Your diet type</label>
+        <select id="diet-type">
+          <option value="0.5">Vegan (no animal products)</option>
+          <option value="0.8">Vegetarian (dairy/eggs ok)</option>
+          <option value="1.3">Flexitarian (occasional meat)</option>
+          <option value="1.7">Omnivore (meat a few times/week)</option>
+          <option value="2.5">Heavy meat eater (daily)</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>How much food do you waste?</label>
+        <select id="food-waste">
+          <option value="0.2">Very little – I rarely waste food</option>
+          <option value="0.5">Some – occasional leftovers thrown away</option>
+          <option value="0.8">Moderate – waste food regularly</option>
+          <option value="1.2">A lot – significant food wasted daily</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Do you buy local / seasonal food?</label>
+        <select id="local-food">
+          <option value="-0.2">Always – I prefer local markets</option>
+          <option value="-0.1">Usually</option>
+          <option value="0">Sometimes</option>
+          <option value="0.2">Rarely – mostly packaged/imported food</option>
+        </select>
+      </div>
+      <div class="btn-row">
+        <button class="btn btn-outline" onclick="prevStep(2)">← Back</button>
+        <button class="btn btn-primary" onclick="nextStep(4)">Next: Waste →</button>
+      </div>
+    </div>
+
+    <!-- STEP 4: WASTE -->
+    <div class="calc-step" id="step-4">
+      <h2>♻️ Waste & Consumption</h2>
+      <div class="form-group">
+        <label>How often do you recycle?</label>
+        <select id="recycle">
+          <option value="-0.3">Always – I sort and recycle everything</option>
+          <option value="-0.1">Usually</option>
+          <option value="0">Sometimes</option>
+          <option value="0.3">Rarely / Never</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>How often do you buy new clothes/electronics?</label>
+        <select id="shopping">
+          <option value="0.2">Rarely – buy only when needed</option>
+          <option value="0.5">Monthly – moderate shopping</option>
+          <option value="1.0">Weekly – frequent shopper</option>
+          <option value="1.5">Very frequently – I love shopping</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Do you use single-use plastics?</label>
+        <select id="plastics">
+          <option value="-0.1">Never – I carry reusable bags/bottles</option>
+          <option value="0.1">Rarely</option>
+          <option value="0.3">Sometimes</option>
+          <option value="0.5">Frequently – I rely on single-use items</option>
+        </select>
+      </div>
+      <div class="btn-row">
+        <button class="btn btn-outline" onclick="prevStep(3)">← Back</button>
+        <button class="btn btn-primary" onclick="calculateFootprint()">Calculate My Footprint 🌍</button>
+      </div>
+    </div>
+
+    <!-- RESULTS -->
+    <div class="calc-step" id="step-result">
+      <h2>Your Carbon Footprint Result</h2>
+      <div class="result-card">
+        <div class="result-score-wrap">
+          <div class="result-emoji" id="result-emoji">🌍</div>
+          <div class="result-score" id="result-score">0.0</div>
+          <div class="result-unit">tons of CO₂ per year</div>
+        </div>
+        <div class="result-level" id="result-level">Calculating...</div>
+        <div class="result-compare">
+          <div class="compare-item">
+            <span class="cmp-label">Your footprint</span>
+            <span class="cmp-val" id="cmp-yours">–</span>
+          </div>
+          <div class="compare-item">
+            <span class="cmp-label">India average</span>
+            <span class="cmp-val">1.9 tons</span>
+          </div>
+          <div class="compare-item">
+            <span class="cmp-label">World average</span>
+            <span class="cmp-val">4.7 tons</span>
+          </div>
+          <div class="compare-item">
+            <span class="cmp-label">Target by 2030</span>
+            <span class="cmp-val">2.0 tons</span>
+          </div>
+        </div>
+        <div class="breakdown-title">Emissions Breakdown</div>
+        <div class="breakdown" id="breakdown">
+          <div class="bd-item">
+            <span class="bd-label">⚡ Energy</span>
+            <div class="bd-bar-wrap"><div class="bd-bar energy-bar" id="bar-energy"></div></div>
+            <span class="bd-val" id="val-energy">–</span>
+          </div>
+          <div class="bd-item">
+            <span class="bd-label">🚗 Transport</span>
+            <div class="bd-bar-wrap"><div class="bd-bar transport-bar" id="bar-transport"></div></div>
+            <span class="bd-val" id="val-transport">–</span>
+          </div>
+          <div class="bd-item">
+            <span class="bd-label">🥗 Food</span>
+            <div class="bd-bar-wrap"><div class="bd-bar food-bar" id="bar-food"></div></div>
+            <span class="bd-val" id="val-food">–</span>
+          </div>
+          <div class="bd-item">
+            <span class="bd-label">♻️ Waste</span>
+            <div class="bd-bar-wrap"><div class="bd-bar waste-bar" id="bar-waste"></div></div>
+            <span class="bd-val" id="val-waste">–</span>
+          </div>
+        </div>
+        <div class="result-message" id="result-message"></div>
+        <div class="btn-row" style="margin-top:1.5rem">
+          <button class="btn btn-primary" onclick="saveResult()">💾 Save to My Progress</button>
+          <a href="tips.html" class="btn btn-outline">💡 Get Personalized Tips</a>
+          <button class="btn btn-outline" onclick="resetCalc()">🔄 Recalculate</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer class="footer">
+    <div class="footer-bottom">
+      <p>© 2025 SustainHub | SDG 13 – Climate Action | Lenovo × Bharat Cares</p>
+    </div>
+  </footer>
+
+  </script>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

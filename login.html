@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login – SustainHub</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="auth-page">
+
+  <div class="auth-wrapper">
+    <div class="auth-brand">
+      <span>🌿</span>
+      <h1>SustainHub</h1>
+      <p>Track Today. Sustain Tomorrow.</p>
+    </div>
+
+    <div class="auth-card">
+      <!-- TABS -->
+      <div class="auth-tabs">
+        <button class="auth-tab active" id="tab-login">Login</button>
+        <button class="auth-tab" id="tab-register">Register</button>
+      </div>
+
+      <!-- LOGIN FORM -->
+      <div id="form-login" class="auth-form active">
+        <h2>Welcome back 👋</h2>
+        <p class="auth-sub">Login to your SustainHub account</p>
+        <div class="auth-field">
+          <label>Email address</label>
+          <input type="email" id="login-email" placeholder="you@example.com" />
+        </div>
+        <div class="auth-field">
+          <label>Password</label>
+          <input type="password" id="login-password" placeholder="Your password" />
+        </div>
+        <div id="login-error" class="auth-error" style="display:none"></div>
+        <button class="btn btn-primary auth-btn" id="btn-login">Login to SustainHub</button>
+        <div class="auth-divider"><span>or</span></div>
+        <button class="btn btn-google" id="btn-google-login">
+          <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" width="18" alt="Google" />
+          Continue with Google
+        </button>
+        <p class="auth-switch">Don't have an account? <a id="goto-register" style="cursor:pointer">Register here</a></p>
+      </div>
+
+      <!-- REGISTER FORM -->
+      <div id="form-register" class="auth-form">
+        <h2>Create account 🌱</h2>
+        <p class="auth-sub">Join SustainHub and track your footprint</p>
+        <div class="auth-field">
+          <label>Full Name</label>
+          <input type="text" id="reg-name" placeholder="Your name" />
+        </div>
+        <div class="auth-field">
+          <label>Email address</label>
+          <input type="email" id="reg-email" placeholder="you@example.com" />
+        </div>
+        <div class="auth-field">
+          <label>Password</label>
+          <input type="password" id="reg-password" placeholder="Minimum 6 characters" />
+        </div>
+        <div class="auth-field">
+          <label>Confirm Password</label>
+          <input type="password" id="reg-confirm" placeholder="Repeat your password" />
+        </div>
+        <div id="reg-error" class="auth-error" style="display:none"></div>
+        <button class="btn btn-primary auth-btn" id="btn-register">Create My Account</button>
+        <div class="auth-divider"><span>or</span></div>
+        <button class="btn btn-google" id="btn-google-register">
+          <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" width="18" alt="Google" />
+          Continue with Google
+        </button>
+        <p class="auth-switch">Already have an account? <a id="goto-login" style="cursor:pointer">Login here</a></p>
+      </div>
+    </div>
+
+    <p class="auth-footer">SDG 13 – Climate Action | Lenovo × Bharat Cares</p>
+  </div>
+
+  <!-- FIREBASE INITIALIZATION & AUTH -->
+  <script type="module">
+    import { initializeApp }                       from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, updateProfile, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
+    // ──────────────────────────────────────────────────────────────
+    // PASTE YOUR FIREBASE CONFIG HERE - Copy from Firebase Console
+    // ──────────────────────────────────────────────────────────────
+    const firebaseConfig = {
+      apiKey: "AIzaSyDD9YReQ4gtGReFRky3Q5M8lLV5FwMXCMQ",
+      authDomain: "sustainhub-eff0c.firebaseapp.com",
+      projectId: "sustainhub-eff0c",
+      storageBucket: "sustainhub-eff0c.firebasestorage.app",
+      messagingSenderId: "538443404375",
+      appId: "1:538443404375:web:d11ff17384a3a64412ff12"
+    };
+    // ──────────────────────────────────────────────────────────────
+
+    // Initialize Firebase
+    const app  = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    // If already logged in → go to home
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        window.location.href = 'index.html';
+      }
+    });
+
+    // ── TAB SWITCHING ──
+    function switchTab(tab) {
+      document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.auth-form').forEach(f => f.classList.remove('active'));
+      document.getElementById('tab-' + tab).classList.add('active');
+      document.getElementById('form-' + tab).classList.add('active');
+    }
+
+    document.getElementById('tab-login').addEventListener('click', () => switchTab('login'));
+    document.getElementById('tab-register').addEventListener('click', () => switchTab('register'));
+    document.getElementById('goto-register').addEventListener('click', () => switchTab('register'));
+    document.getElementById('goto-login').addEventListener('click', () => switchTab('login'));
+
+    // ── ERROR DISPLAY ──
+    function showError(id, msg) {
+      const el = document.getElementById(id);
+      el.textContent = msg;
+      el.style.display = 'block';
+      console.error(msg);
+    }
+
+    function clearError(id) {
+      const el = document.getElementById(id);
+      el.textContent = '';
+      el.style.display = 'none';
+    }
+
+    function friendlyError(code) {
+      const map = {
+        'auth/email-already-in-use':   'This email is already registered. Try logging in.',
+        'auth/invalid-email':           'Please enter a valid email address.',
+        'auth/weak-password':           'Password must be at least 6 characters.',
+        'auth/user-not-found':          'No account found with this email.',
+        'auth/wrong-password':          'Incorrect password. Please try again.',
+        'auth/invalid-credential':      'Incorrect email or password.',
+        'auth/too-many-requests':       'Too many attempts. Please try again later.',
+        'auth/popup-closed-by-user':    'Google sign-in was cancelled.',
+        'auth/network-request-failed':  'Network error. Check internet.',
+      };
+      return map[code] || 'Error: ' + code;
+    }
+
+    // ── REGISTER ──
+    document.getElementById('btn-register').addEventListener('click', async () => {
+      clearError('reg-error');
+      const name     = document.getElementById('reg-name').value.trim();
+      const email    = document.getElementById('reg-email').value.trim();
+      const password = document.getElementById('reg-password').value;
+      const confirm  = document.getElementById('reg-confirm').value;
+
+      if (!name)                return showError('reg-error', 'Please enter your name.');
+      if (!email)               return showError('reg-error', 'Please enter your email.');
+      if (password.length < 6)  return showError('reg-error', 'Password must be at least 6 characters.');
+      if (password !== confirm) return showError('reg-error', 'Passwords do not match.');
+
+      const btn = document.getElementById('btn-register');
+      btn.textContent = 'Creating account...';
+      btn.disabled = true;
+
+      try {
+        const cred = await createUserWithEmailAndPassword(auth, email, password);
+        await updateProfile(cred.user, { displayName: name });
+        console.log('Account created:', cred.user.email);
+        // onAuthStateChanged will redirect
+      } catch (err) {
+        showError('reg-error', friendlyError(err.code));
+        btn.textContent = 'Create My Account';
+        btn.disabled = false;
+      }
+    });
+
+    // ── LOGIN ──
+    document.getElementById('btn-login').addEventListener('click', async () => {
+      clearError('login-error');
+      const email    = document.getElementById('login-email').value.trim();
+      const password = document.getElementById('login-password').value;
+
+      if (!email)    return showError('login-error', 'Please enter your email.');
+      if (!password) return showError('login-error', 'Please enter your password.');
+
+      const btn = document.getElementById('btn-login');
+      btn.textContent = 'Logging in...';
+      btn.disabled = true;
+
+      try {
+        const cred = await signInWithEmailAndPassword(auth, email, password);
+        console.log('Logged in:', cred.user.email);
+        // onAuthStateChanged will redirect
+      } catch (err) {
+        showError('login-error', friendlyError(err.code));
+        btn.textContent = 'Login to SustainHub';
+        btn.disabled = false;
+      }
+    });
+
+    // ── GOOGLE SIGN-IN ──
+    async function googleSignIn() {
+      try {
+        const provider = new GoogleAuthProvider();
+        const cred = await signInWithPopup(auth, provider);
+        console.log('Google sign-in:', cred.user.email);
+      } catch (err) {
+        showError('login-error', friendlyError(err.code));
+        showError('reg-error',   friendlyError(err.code));
+      }
+    }
+
+    document.getElementById('btn-google-login').addEventListener('click', googleSignIn);
+    document.getElementById('btn-google-register').addEventListener('click', googleSignIn);
+
+  </script>
+</body>
+</html>

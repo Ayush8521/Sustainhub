@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Eco Challenges – SustainHub</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="nav-brand">
+      <span class="leaf-icon">🌿</span>
+      <span class="brand-name">SustainHub</span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="calculator.html">Calculator</a></li>
+      <li><a href="tracker.html">My Progress</a></li>
+      <li><a href="challenges.html" class="active">Challenges</a></li>
+      <li><a href="tips.html">Eco Tips</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menu">&#9776;</button>
+    <div class="nav-user">
+      <span class="nav-username-badge">👤 <span id="nav-username">...</span></span>
+      <button class="btn-logout">Logout</button>
+    </div>
+  </nav>
+
+  <div class="page-header">
+    <h1>🏆 Eco Challenges</h1>
+    <p>Take on weekly challenges to build sustainable habits and earn badges.</p>
+  </div>
+
+  <div class="challenges-container">
+
+    <!-- BADGES EARNED -->
+    <div class="badges-strip">
+      <h2>Your Badges: <span id="badge-count">0</span> earned</h2>
+      <div class="badges-display" id="badges-display">
+        <div class="badge-empty">Complete challenges to earn badges here!</div>
+      </div>
+    </div>
+
+    <!-- CHALLENGES GRID -->
+    <div class="challenge-filters">
+      <button class="filter-btn active" onclick="filterChallenges('all')">All</button>
+      <button class="filter-btn" onclick="filterChallenges('easy')">Easy 🟢</button>
+      <button class="filter-btn" onclick="filterChallenges('medium')">Medium 🟡</button>
+      <button class="filter-btn" onclick="filterChallenges('hard')">Hard 🔴</button>
+    </div>
+
+    <div class="challenges-grid" id="challenges-grid">
+      <!-- Dynamically rendered by JS -->
+    </div>
+
+  </div>
+
+  <footer class="footer">
+    <div class="footer-bottom">
+      <p>© 2025 SustainHub | SDG 13 – Climate Action | Lenovo × Bharat Cares</p>
+    </div>
+  </footer>
+
+  </script>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

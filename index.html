@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SustainHub – Track Today. Sustain Tomorrow.</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="navbar">
+    <div class="nav-brand">
+      <span class="leaf-icon">🌿</span>
+      <span class="brand-name">SustainHub</span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="calculator.html">Calculator</a></li>
+      <li><a href="tracker.html">My Progress</a></li>
+      <li><a href="challenges.html">Challenges</a></li>
+      <li><a href="tips.html">Eco Tips</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menu">&#9776;</button>
+    <div class="nav-user">
+      <span class="nav-username-badge">👤 <span id="nav-username">...</span></span>
+      <button class="btn-logout">Logout</button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-badge">🌍 SDG 13 – Climate Action</div>
+      <h1>Track Today.<br><span class="highlight">Sustain Tomorrow.</span></h1>
+      <p class="hero-sub">Understand your daily carbon footprint, build greener habits, and take real action against climate change — one day at a time.</p>
+      <div class="hero-cta">
+        <a href="calculator.html" class="btn btn-primary">Calculate My Footprint</a>
+        <a href="about.html" class="btn btn-outline">Learn More</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="earth-card">
+        <div class="earth-emoji">🌱</div>
+        <div class="earth-stat">
+          <span class="stat-num" id="co2-counter">4.7</span>
+          <span class="stat-label">tons CO₂/year avg. per person</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS STRIP -->
+  <section class="stats-strip">
+    <div class="stat-item">
+      <span class="stat-big">1.5°C</span>
+      <span class="stat-desc">Global warming limit set by Paris Agreement</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-big">36B</span>
+      <span class="stat-desc">Tons of CO₂ emitted globally each year</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-big">45%</span>
+      <span class="stat-desc">Reduction needed by 2030 to limit warming</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-big">2050</span>
+      <span class="stat-desc">Target year for net-zero emissions worldwide</span>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="section how-it-works">
+    <h2 class="section-title">How SustainHub Works</h2>
+    <p class="section-sub">Four simple steps to a greener lifestyle</p>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-icon">🧮</div>
+        <div class="step-num">01</div>
+        <h3>Calculate</h3>
+        <p>Enter your daily habits — electricity usage, travel, food, and waste — to calculate your personal carbon footprint instantly.</p>
+        <a href="calculator.html" class="step-link">Start calculating →</a>
+      </div>
+      <div class="step-card">
+        <div class="step-icon">📊</div>
+        <div class="step-num">02</div>
+        <h3>Track</h3>
+        <p>Log your footprint every day and watch your progress chart. See patterns and identify where you can improve most.</p>
+        <a href="tracker.html" class="step-link">View tracker →</a>
+      </div>
+      <div class="step-card">
+        <div class="step-icon">🏆</div>
+        <div class="step-num">03</div>
+        <h3>Challenge</h3>
+        <p>Take on eco-friendly challenges like "No-Car Week" or "Plant-Based Day" and earn badges for completing them.</p>
+        <a href="challenges.html" class="step-link">See challenges →</a>
+      </div>
+      <div class="step-card">
+        <div class="step-icon">💡</div>
+        <div class="step-num">04</div>
+        <h3>Improve</h3>
+        <p>Get personalized sustainability tips based on your biggest emission sources and take action that actually matters.</p>
+        <a href="tips.html" class="step-link">Get tips →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUICK CALCULATOR TEASER -->
+  <section class="section quick-calc">
+    <div class="quick-calc-inner">
+      <div class="quick-calc-text">
+        <h2>Ready to know your footprint?</h2>
+        <p>Most people are surprised by how much their daily choices impact the planet. Our simple calculator takes less than 2 minutes and gives you a clear picture of your emissions.</p>
+        <ul class="feature-list">
+          <li>✅ Energy & electricity usage</li>
+          <li>✅ Transportation & travel</li>
+          <li>✅ Food & diet habits</li>
+          <li>✅ Waste & recycling</li>
+        </ul>
+        <a href="calculator.html" class="btn btn-primary">Calculate Now — It's Free</a>
+      </div>
+      <div class="quick-calc-img">
+        <div class="preview-card">
+          <div class="preview-header">Your Carbon Score</div>
+          <div class="preview-score">6.2 <span>tons CO₂/yr</span></div>
+          <div class="preview-bar-wrap">
+            <div class="preview-bar" style="width:62%"></div>
+          </div>
+          <div class="preview-legend">
+            <span>0</span><span>World avg: 4.7</span><span>10+</span>
+          </div>
+          <div class="preview-sources">
+            <div class="ps-item"><span class="ps-dot" style="background:#e74c3c"></span>Transport 38%</div>
+            <div class="ps-item"><span class="ps-dot" style="background:#f39c12"></span>Energy 29%</div>
+            <div class="ps-item"><span class="ps-dot" style="background:#27ae60"></span>Food 22%</div>
+            <div class="ps-item"><span class="ps-dot" style="background:#3498db"></span>Waste 11%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span class="leaf-icon">🌿</span>
+        <span class="brand-name">SustainHub</span>
+        <p>Track Today. Sustain Tomorrow.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Navigate</h4>
+        <a href="calculator.html">Carbon Calculator</a>
+        <a href="tracker.html">Progress Tracker</a>
+        <a href="challenges.html">Eco Challenges</a>
+        <a href="tips.html">Sustainability Tips</a>
+        <a href="about.html">About</a>
+      </div>
+      <div class="footer-sdg">
+        <h4>SDG 13 – Climate Action</h4>
+        <p>This project is built in alignment with the United Nations Sustainable Development Goal 13: Take urgent action to combat climate change and its impacts.</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 SustainHub | Capstone Project – SDG 13 Climate Action | Lenovo × Bharat Cares</p>
+    </div>
+  </footer>
+
+  <script type="module">
+  <script type="module" src="app.js"></script>
+</body>
+</html>

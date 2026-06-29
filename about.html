@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About – SustainHub</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="nav-brand">
+      <span class="leaf-icon">🌿</span>
+      <span class="brand-name">SustainHub</span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="calculator.html">Calculator</a></li>
+      <li><a href="tracker.html">My Progress</a></li>
+      <li><a href="challenges.html">Challenges</a></li>
+      <li><a href="tips.html">Eco Tips</a></li>
+      <li><a href="about.html" class="active">About</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menu">&#9776;</button>
+    <div class="nav-user">
+      <span class="nav-username-badge">👤 <span id="nav-username">...</span></span>
+      <button class="btn-logout">Logout</button>
+    </div>
+  </nav>
+
+  <div class="page-header">
+    <h1>🌍 About SustainHub</h1>
+    <p>A capstone project aligned with UN SDG 13 – Climate Action</p>
+  </div>
+
+  <div class="about-container">
+
+    <div class="about-section">
+      <h2>Selected SDG: Goal 13 – Climate Action</h2>
+      <div class="sdg-card">
+        <div class="sdg-num">13</div>
+        <div class="sdg-info">
+          <h3>Take urgent action to combat climate change and its impacts</h3>
+          <p>SDG 13 calls for urgent action at all levels to minimize the disruptive impacts of climate change. It targets improving resilience and adaptive capacity to climate-related hazards, integrating climate measures into policy, and improving education and awareness about climate change mitigation.</p>
+        </div>
+      </div>
+      <p>Climate change is one of the most pressing challenges of our time. Rising global temperatures, extreme weather events, melting polar ice, and rising sea levels threaten ecosystems and human communities around the world. India is particularly vulnerable, with heat waves, erratic monsoons, and coastal flooding affecting millions of people.</p>
+    </div>
+
+    <div class="about-section">
+      <h2>Problem Statement</h2>
+      <div class="problem-card">
+        <div class="prob-item"><span class="prob-q">What is the problem?</span><p>Most individuals are unaware of their daily carbon footprint — the total greenhouse gases emitted through their everyday habits like electricity usage, transportation, and food choices.</p></div>
+        <div class="prob-item"><span class="prob-q">Where does this problem exist?</span><p>This problem is global, but particularly significant in fast-growing economies like India where urbanization, rising incomes, and energy demand are rapidly increasing per-capita emissions.</p></div>
+        <div class="prob-item"><span class="prob-q">Who is affected?</span><p>Everyone — individuals, families, and communities — who contribute to emissions without realizing it. Future generations bear the heaviest burden of unaddressed climate change today.</p></div>
+        <div class="prob-item"><span class="prob-q">Why is it serious?</span><p>The IPCC warns we must cut global emissions by 45% by 2030 to limit warming to 1.5°C. Without individual action at scale, this target becomes impossible to achieve through policy alone.</p></div>
+        <div class="prob-item"><span class="prob-q">What if it is not solved?</span><p>Continued high emissions will lead to more frequent extreme weather, food insecurity, water scarcity, displacement of coastal populations, and irreversible ecological damage.</p></div>
+      </div>
+    </div>
+
+    <div class="about-section">
+      <h2>Proposed Solution – SustainHub</h2>
+      <p>SustainHub is a web application that empowers individuals to understand, track, and reduce their personal carbon footprint. It bridges the gap between abstract climate data and concrete personal action.</p>
+      <div class="solution-grid">
+        <div class="sol-card">
+          <div class="sol-icon">🧮</div>
+          <h3>Carbon Calculator</h3>
+          <p>Users answer simple questions about their energy, transport, food, and waste habits. The system estimates their annual CO₂ emissions in tons.</p>
+        </div>
+        <div class="sol-card">
+          <div class="sol-icon">📊</div>
+          <h3>Progress Tracker</h3>
+          <p>Users log their footprint over time and visualize trends through charts. Achievements reward consistent tracking and improvement.</p>
+        </div>
+        <div class="sol-card">
+          <div class="sol-icon">🏆</div>
+          <h3>Eco Challenges</h3>
+          <p>Gamified weekly challenges like "No-Car Week" and "Meatless Monday" encourage behavioral change in a fun, engaging way.</p>
+        </div>
+        <div class="sol-card">
+          <div class="sol-icon">💡</div>
+          <h3>Sustainability Tips</h3>
+          <p>Categorized actionable tips on energy, transport, food, and waste help users take targeted action in the areas where they emit the most.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="about-section">
+      <h2>Technology Stack</h2>
+      <div class="tech-stack">
+        <div class="tech-item">
+          <span class="tech-icon">🌐</span>
+          <div>
+            <strong>Frontend</strong>
+            <p>HTML5, CSS3, JavaScript (ES6+)</p>
+          </div>
+        </div>
+        <div class="tech-item">
+          <span class="tech-icon">📊</span>
+          <div>
+            <strong>Data Visualization</strong>
+            <p>Chart.js – for progress charts and graphs</p>
+          </div>
+        </div>
+        <div class="tech-item">
+          <span class="tech-icon">💾</span>
+          <div>
+            <strong>Storage</strong>
+            <p>localStorage – for saving user data in the browser (no backend required)</p>
+          </div>
+        </div>
+        <div class="tech-item">
+          <span class="tech-icon">🎨</span>
+          <div>
+            <strong>Icons</strong>
+            <p>Font Awesome 6 – for interface icons</p>
+          </div>
+        </div>
+        <div class="tech-item">
+          <span class="tech-icon">📱</span>
+          <div>
+            <strong>Design</strong>
+            <p>Responsive CSS – works on mobile, tablet, and desktop</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="about-section">
+      <h2>Future Scope</h2>
+      <ul class="future-list">
+        <li>🔐 User accounts & authentication (backend with Node.js/Firebase)</li>
+        <li>🤝 Social features – compare footprint with friends and community</li>
+        <li>🗺️ Regional data – emission factors customized per Indian state/city</li>
+        <li>📱 Mobile app (Progressive Web App / React Native)</li>
+        <li>🤖 AI-powered personalized recommendations</li>
+        <li>🏢 Business/organization version for corporate sustainability</li>
+        <li>🌳 Virtual tree planting – gamified reforestation rewards</li>
+        <li>📰 Climate news feed – curated latest climate news for India</li>
+      </ul>
+    </div>
+
+    <div class="about-section project-info">
+      <h2>Project Information</h2>
+      <table class="info-table">
+        <tr><td>Project Name</td><td><strong>SustainHub</strong></td></tr>
+        <tr><td>Tagline</td><td>Track Today. Sustain Tomorrow.</td></tr>
+        <tr><td>SDG</td><td>Goal 13 – Climate Action</td></tr>
+        <tr><td>Category</td><td>Web Development Capstone Project</td></tr>
+        <tr><td>Program</td><td>Lenovo × Bharat Cares</td></tr>
+        <tr><td>Technology</td><td>HTML, CSS, JavaScript, Chart.js</td></tr>
+      </table>
+    </div>
+
+  </div>
+
+  <footer class="footer">
+    <div class="footer-bottom">
+      <p>© 2025 SustainHub | SDG 13 – Climate Action | Lenovo × Bharat Cares</p>
+    </div>
+  </footer>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
